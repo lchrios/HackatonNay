@@ -247,7 +247,7 @@
             <div class="card" data-toggle="modal" data-target="#noti1" style="width: 18rem;">
                 <img class="card-img-top" src="img/noti1.jpg" alt="Card image cap">
                 <div class="card-body">
-                    <a class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <a class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</a>
                 </div>
             </div>
         </div>
@@ -272,6 +272,20 @@
     </div>
 </div>
 
+<script src="https://www.gstatic.com/firebasejs/5.9.3/firebase.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.8.4/firebase-auth.js"></script>
+<script>
+    // Initialize Firebase
+    var config = {
+        apiKey: "AIzaSyDOg6qmvkj-2cQJwiPZl-_iYIq6dSHrwV8",
+        authDomain: "hackatonnay.firebaseapp.com",
+        databaseURL: "https://hackatonnay.firebaseio.com",
+        projectId: "hackatonnay",
+        storageBucket: "hackatonnay.appspot.com",
+        messagingSenderId: "996222165208"
+    };
+    firebase.initializeApp(config);
+</script>
 <script type="text/javascript">
     $(document).ready(function () {
         $('#sidebarCollapse').on('click', function () {
