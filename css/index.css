@@ -50,6 +50,7 @@ a, a:hover a:focus{
     background-image: url("../img/action.jpg");
     background-size: auto;
     background-repeat: round;
+    background-attachment: fixed;
 }
 
 #mainImg {
