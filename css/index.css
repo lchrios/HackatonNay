@@ -41,6 +41,18 @@ a, a:hover a:focus{
     box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
 }
 
+#backCont1 {
+    background-image: url("../img/action.jpg");
+    background-size: auto;
+    background-repeat: round;
+}
+
+#mainImg {
+    display: block;
+    max-width: 97%;
+    margin-left: 15px;
+    margin-top: 15px;
+}
 
 .navbar-btn {
     box-shadow: none;
