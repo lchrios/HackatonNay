@@ -35,7 +35,20 @@ function search() {
 }
 
 function submitContactPetition() {
-
+    let nombreCon = document.getElementById('conName').value;
+    let emailCon  = document.getElementById('conMail').value;
+    let asunto    = document.getElementById('conAsunto').value;
+    let messCon   = document.getElementById('conMess').value;
+    var contact = db.ref('contactRequest');
+    contact.once('value').then(function (snapshot) {
+        contact.child(snapshot.numChild()).set({
+            nombre: nombreCon,
+            email: emailCon,
+            asunto: asunto,
+            mensaje: messCon
+        });
+    });
+    $('#contactUs').modal('hide');
 }
 
 function updateNews(){
