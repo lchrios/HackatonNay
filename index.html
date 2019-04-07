@@ -4,8 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width-device-width, initial-scale=1.0">
     <title>COPARMEX</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <link rel="stylesheet" href="css/index.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script defer src="https://use.fontawesome.com/releases/v5.8.1/js/all.js" integrity="sha384-g5uSoOSBd7KkhAMlnQILrecXvzst9TdC09/VM+pjDTCM+1il8RHz5fKANTFFb+gQ" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
@@ -13,8 +15,8 @@
 <body>
 <div class="container-fluid bg-primary">
     <div class="col-sm-12 sticky-top">
-        <nav class="navbar navbar-expand-lg navbar-light bg-info">
-            <a class="navbar-brand" href="#"><h3>COPARMEX Nayarit</h3></a>
+        <nav class="navbar rounded-bottom navbar-expand-lg navbar-light bg-info">
+            <a class="navbar-brand text-light" href="index.html"><h3>COPARMEX Nayarit</h3></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -34,9 +36,9 @@
                             Acerca de nosotros
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" href="#">¿Quienes somos?</a>
-                            <a class="dropdown-item" href="#">Contáctanos</a>
-                            <a class="dropdown-item" href="#">Bolsa de trabajo</a>
+                            <a class="dropdown-item navbar-btn" data-toggle="modal" data-target="#whoRWe">¿Quienes somos?</a>
+                            <a class="dropdown-item" data-toggle="modal" data-target="#contactUs">Contáctanos</a>
+                            <a class="dropdown-item" data-toggle="modal" data-target="#bolsaTrabajo">Bolsa de trabajo</a>
                         </div>
                     </li>
                 </ul>
@@ -45,22 +47,61 @@
     </div>
     <div class="row">
         <div class="jumbotron bg-primary col-sm-9">
-            <a id="servicios" class="text-light display-4">CENTRO EMPRESARIAL</a>
+            <div class="row">
+                <a id="servicios" class="text-light display-4">CENTRO EMPRESARIAL</a>
+            </div>
+            <hr>
+            <div class="row container-fluid bg-primary">
+                <table class="table table-responsive table-primary table-hover">
+                    <thead>
+                    <tr>
+                        <th scope="col">
+                            <p class="text-dark text-right">NUESTROS SERVICIOS</p>
+                        </th>
+                    </tr>
+                    </thead>
+
+                    <tr>
+                        <th scope="col"><i class="fa fa-comment-dots display-4"></i></th>
+                        <th scope="col">
+                            <p class="text-left text-dark">Red de negocios</p><br>
+                            <p class="text-left text-dark">Unete a nuestra Red de Negocios y recibe inumerables beneficios al parte de ella.</p>
+                        </th>
+                        <th scope="col"><i class="fa fa-laptop display-4"></i></th>
+                        <th scope="col">
+                            <p class="text-left text-dark">Capacitacion</p><br>
+                            <p class="text-left text-dark">Los Mejores cursos para nuestros Agremiados.</p>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th scope="col"><i class="fa fa-calendar-day display-4"></i></th>
+                        <th scope="col">
+                            <p class="text-left text-dark">Eventos</p><br>
+                            <p class="text-left text-dark">Unete a nuestra Red de Negocios y recibe inumerables beneficios al parte de ella.</p>
+                        </th>
+                        <th scope="col"><i class="fa fa-edit display-4"></i></th>
+                        <th scope="col">
+                            <p class="text-left text-dark">Apoyos</p><br>
+                            <p class="text-left text-dark">Instalaciones Adecuadas para tu curso, evento o reunión.</p>
+                        </th>
+                    </tr>
+                </table>
+            </div>
             <hr id="socios">
-            <p class="display-4 text-right">Socios</p>
+            <p class="display-4 text-right text-light">Socios</p>
             <!-- Aqui ira lo de los socios -->
-            <nav class="navbar navbar-dark bg-secondary">
+            <nav id="searchBar" class="navbar bg-success rounded" style="background: #11f2ff;">
                 <form class="form-inline">
                     <div class="input-group">
                         <div class="input-group-prepend">
                             <button class="btn btn-info" onclick="search()">Buscar</button>
                         </div>
-                        <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+                        <input type="text" class="form-control" placeholder="Categoria, nombre, tag..." aria-label="Username" aria-describedby="basic-addon1">
                     </div>
                 </form>
             </nav>
-            <div class="row">
-                <div class="card grid-item col-sm-3" style="width: 18rem;">
+            <div class="row d-flex justify-content-around">
+                <div class="card" style="width: 18rem;">
                     <img class="card-img-top" src="..." alt="Card image cap">
                     <div class="card-body">
                         <h5 class="card-title">Nombre empresa</h5>
@@ -68,15 +109,7 @@
                         <a href="#" class="btn btn-primary">ver más...</a>
                     </div>
                 </div>
-                <div class="card grid-item col-sm-3" style="width: 18rem;">
-                    <img class="card-img-top" src="..." alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Nombre empresa</h5>
-                        <p class="card-text">Descirpcion de la empresa y demas</p>
-                        <a href="#" class="btn btn-primary">c</a>
-                    </div>
-                </div>
-                <div class="card grid-item col-sm-3" style="width: 18rem;">
+                <div class="card" style="width: 18rem;">
                     <img class="card-img-top" src="..." alt="Card image cap">
                     <div class="card-body">
                         <h5 class="card-title">Nombre empresa</h5>
@@ -84,7 +117,7 @@
                         <a href="#" class="btn btn-primary">ver más...</a>
                     </div>
                 </div>
-                <div class="card grid-item col-sm-3" style="width: 18rem;">
+                <div class="card" style="width: 18rem;">
                     <img class="card-img-top" src="..." alt="Card image cap">
                     <div class="card-body">
                         <h5 class="card-title">Nombre empresa</h5>
@@ -93,12 +126,130 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="col-sm-3">
+            <div class="modal fade" id="whoRWe" tabindex="-1" role="dialog" aria-labelledby="whoRWeLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="whoRWeLabel">¿Quiénes somos?</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <p>El Centro Empresarial de Nayarit S.P.fué constituido el 24 de febrero de 1971 como Sindicato Patronal de Afilicion Voluntaria integrado por empresarios pertenecientes a los sectores de servicio, comercio e industria de las micros , pequeñas , medianas y grandes empresas del Estado de Nayarit</p>
+                            <button class="dropdown-item navbar-btn btn-lg btn-info" data-toggle="modal" data-target="#directorMail">Carta del director</button>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade" id="directorMail" tabindex="-1" role="dialog" aria-labelledby="dirMailTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="dirMailTitle">Carta del director</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <h2>El Centro Empresarial de Nayarit</h2>
+                                <p>
+                                    Es una organización empresarial independiente constituida bajo la figura de un Sindicato Patronal que nace de la unión de empresarios comprometidos con el desarrollo de la sociedad, buscando siempre generar las condiciones de prosperidad de las empresas, sus trabajadores y por ende el bienestar de todos y cada uno de los mexicanos en un ambiente humanista y de desarrollo integral a través del diálogo, foros, intercambios comerciales, exposiciones, etc. Hoy, te presentamos nuestra página que ponemos a tu servicio en la que podrás encontrar una gama de eventos, informes, actualizaciones, contactos, conferencias, talleres, convocatorias, entre otros; que ayudarán a darte cuenta de la magnitud de los beneficios y oportunidades que puedes obtener; si todavia no te has unido a nuestras filas te invitamos a ser parte de nuestra gran Familia COPARMEX, pero si ya eres socio, te invito a mantener una comunicación estrecha y darte pronta respuesta a tus inquietudes y necesidades empresariales. Además, COPARMEX brinda una plataforma de crecimiento tanto personal como empresarial, operada a través de su personal quien está capacitado para buscar oportunidades de resolución e informes, complementado y guiado por todos y cada uno de los miembros del Consejo Directivo y miembros de los distintos Comités especializados en cada una de las áreas empresariales y de desarrollo social, quienes aportan su tiempo y trabajo a favor de sus socios y la sociedad, buscando siempre la relación armoniosa, pero contundente, con las autoridades gubernamentales, así como con asociaciones y cámaras empresariales, siendo fiel a su filosofía y objetivos propios. Me es grato recibirte en este tu espacio, en el que estoy seguro podrás encontrar lo necesario para mantener el entusiasmo para trabajar orientados a lograr el bien común, porque nuestro Nayarit lo vale. ATENTAMENTE, Ing. José Francisco Talavera del Río PRESIDENTE
+                                </p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
+            <div class="modal fade" id="contactUs" tabindex="-1" role="dialog" aria-labelledby="contactUsLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="contactUsLabel">Contáctanos</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form>
+                                <div class="form-group">
+                                    <label for="conName">Nombre completo</label>
+                                    <input type="email" class="form-control" id="conName" placeholder="JordiENP">
+                                </div>
+                                <div class="form-group">
+                                    <label for="conMail">Email</label>
+                                    <input type="email" class="form-control" id="conMail" placeholder="correo@xxxxxx.xxx">
+                                </div>
+                                <div class="form-group">
+                                    <label for="conAsunto">Asunto</label>
+                                    <input type="email" class="form-control" id="conAsunto" placeholder="Asunto">
+                                </div>
+                                <div class="form-group">
+                                    <label for="conMess">Mensaje</label>
+                                    <textarea class="form-control" id="conMess" rows="4"></textarea>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary" onclick="submitContactPetition()">Enviar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="modal fade bd-example-modal-lg" id="bolsaTrabajo" tabindex="-1" role="dialog" aria-labelledby="bolsaTrabajoLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h2 class="modal-title" id="bolsaTrabajoLabel">Bolsa de trabajo</h2>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <h5>Acércate a nosotros</h5>
+                            <div class="row">
+                                <div class="col-sm-8">
+                                    <table class="table table-light table-hover">
+                                        <tr>
+                                            <td><i class="fa fa-map-marker-alt"></i></td>
+                                            <td>Ebanistas 74, Cd. Industrial, Tepic, Nayarit, México</td>
+                                        </tr>
+                                        <tr>
+                                            <td><i class="fa fa-paper-plane"></i></td>
+                                            <td>afiliacion@coparmexnayarit.org</td>
+                                        </tr>
+                                        <tr>
+                                            <td><i class="fa fa-phone"></i></td>
+                                            <td>3112143588  3112143586  3112143587  </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div class="col-sm-3 d-flex justify-content-center">
+                                    <img src="img/coparmex__logo.JPG" width="200" height="200">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="col-sm-3">
+            <h1>LOL</h1>
         </div>
     </div>
 </div>
+
 <script type="text/javascript">
     $(document).ready(function () {
         $('#sidebarCollapse').on('click', function () {

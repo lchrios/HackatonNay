@@ -75,6 +75,10 @@ a, a:hover a:focus{
     height: 25vh;
 }
 
+#searchBar {
+    background: #11f2ff;
+}
+
 #sidebar {
     margin-top: 90px;
     min-width: 200px;
