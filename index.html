@@ -4,15 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width-device-width, initial-scale=1.0">
     <title>COPARMEX</title>
+    <script src="https://www.gstatic.com/firebasejs/5.9.3/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyDOg6qmvkj-2cQJwiPZl-_iYIq6dSHrwV8",
+            authDomain: "hackatonnay.firebaseapp.com",
+            databaseURL: "https://hackatonnay.firebaseio.com",
+            projectId: "hackatonnay",
+            storageBucket: "hackatonnay.appspot.com",
+            messagingSenderId: "996222165208"
+        };
+        firebase.initializeApp(config);
+    </script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/bootstrap-social.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="js/index.js"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.8.1/js/all.js" integrity="sha384-g5uSoOSBd7KkhAMlnQILrecXvzst9TdC09/VM+pjDTCM+1il8RHz5fKANTFFb+gQ" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </head>
-<body>
+<body onload="updateNews()">
 <div id="backCont1" class="container-fluid bg-primary">
     <div class="col-sm-12 sticky-top">
         <nav class="navbar rounded-bottom navbar-expand-lg navbar-light bg-info">
@@ -41,9 +56,95 @@
                             <a class="dropdown-item" data-toggle="modal" data-target="#bolsaTrabajo">Bolsa de trabajo</a>
                         </div>
                     </li>
+                    <li>
+                        <button id="btLogin" data-toggle="modal" data-target="#loginModal" class="btn btn-primary">Acceder</button>
+                    </li>
+                    <li>
+                        <button id="btCreateAcc" data-toggle="modal" data-target="#createModal" class="btn btn-secondary">Crear cuenta</button>
+                    </li>
+                    <li>
+                        <div class="row" style="margin-left: 10px">
+                            <a class="h3" id="userIsLoged" style="display: none;"></a>
+                            <button id="btSignOut" onclick="signout()" class="btn btn-danger" style="display: none; margin-left: 5px"><i class="fa fa-sign-out-alt"></i></button>
+                        </div>
+                    </li>
                 </ul>
             </div>
         </nav>
+    </div>
+    <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="loginModalTitle">Ingresa a tu cuenta</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="inputMailLI">Correo electrónico</label>
+                            <input type="email" class="form-control" id="inputMailLI" aria-describedby="emailHelp" placeholder="Ingresa correo">
+                            <small id="emailHelp" class="form-text text-muted">Nunca compartiremos tu correo con terceros.</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPasswordLI">Constraseña</label>
+                            <input type="password" class="form-control" id="inputPasswordLI" placeholder="Contraseña">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" onclick="login()">Ingresar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="createModalTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="createModalTitle">Crear nueva cuenta</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="inputName">Nombre(s):</label>
+                            <input type="text" class="form-control" id="inputName" placeholder="Nombre">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputLFName">Apellido paterno:</label>
+                            <input type="text" class="form-control" id="inputLFName" placeholder="Apellido paterno">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputLMName">Apellido materno:</label>
+                                <input type="text" class="form-control" id="inputLMName" placeholder="Apellido materno">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputMailNU">Correo electrónico</label>
+                            <input type="email" class="form-control" id="inputMailNU" aria-describedby="emailHelpNU" placeholder="Ingresa correo">
+                            <small id="emailHelpNU" class="form-text text-muted">Nunca compartiremos tu correo con terceros.</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPasswordNU">Constraseña</label>
+                            <input type="password" class="form-control" id="inputPasswordNU" placeholder="Contraseña">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputRePasswordNU">Confirmar constraseña</label>
+                            <input type="password" class="form-control" id="inputRePasswordNU" placeholder="Contraseña">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button class="btn btn-primary" onclick="createNewUser()">Crear cuenta</button>
+                </div>
+            </div>
+        </div>
     </div>
     <div class="row d-flex justify-content-center">
         <div class="container bg-light col-sm-9">
@@ -102,27 +203,52 @@
             </nav>
             <div class="row d-flex justify-content-around">
                 <div class="card" style="width: 18rem;">
-                    <img class="card-img-top" src="..." alt="Card image cap">
+                    <img class="card-img-top" src="img/bardahl.jpg" height="250px" alt="Card image cap">
                     <div class="card-body">
-                        <h5 class="card-title">Nombre empresa</h5>
-                        <p class="card-text">Descirpcion de la empresa y demas</p>
-                        <a href="#" class="btn btn-primary">ver más...</a>
+                        <h5 class="card-title">Bardahl</h5>
+                        <p class="card-text">Fabricantes de lubricantes para auto.</p>
                     </div>
                 </div>
-                <div class="card" style="width: 18rem;">
-                    <img class="card-img-top" src="..." alt="Card image cap">
+                <div class="card" style="...">
+                    <img class="card-img-top" src="img/canon.jpg" height="250px" alt="Card image cap">
                     <div class="card-body">
-                        <h5 class="card-title">Nombre empresa</h5>
-                        <p class="card-text">Descirpcion de la empresa y demas</p>
-                        <a href="#" class="btn btn-primary">ver más...</a>
+                        <h5 class="card-title">Canon</h5>
+                        <p class="card-text">Diseñan cámaras fotográficas.</p>
                     </div>
                 </div>
-                <div class="card" style="width: 18rem;">
-                    <img class="card-img-top" src="..." alt="Card image cap">
+                <div class="card" style="...">
+                    <img class="card-img-top" src="img/att.jpg" height="250px" alt="Card image cap">
                     <div class="card-body">
-                        <h5 class="card-title">Nombre empresa</h5>
-                        <p class="card-text">Descirpcion de la empresa y demas</p>
-                        <a href="#" class="btn btn-primary">ver más...</a>
+                        <h5 class="card-title">AT&T</h5>
+                        <p class="card-text">Empresa de tecnología y comunicaciones.</p>
+                    </div>
+                </div>
+                <div class="card" style="...">
+                    <img class="card-img-top" src="img/globalgas.jpg" height="250px" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">Global gas</h5>
+                        <p class="card-text">Servicio de gas.</p>
+                    </div>
+                </div>
+                <div class="card" style="...">
+                    <img class="card-img-top" src="img/honda.jpg" height="250px" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">Honda</h5>
+                        <p class="card-text">Fabricante de autos.</p>
+                    </div>
+                </div>
+                <div class="card" style="...">
+                    <img class="card-img-top" src="img/proyecta.jpg" height="250px" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">Proyect a</h5>
+                        <p class="card-text">Empresa de tecnología y computación.</p>
+                    </div>
+                </div>
+                <div class="card" style="...">
+                    <img class="card-img-top" src="img/servigruas.jpg" height="200" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">Servigrúas de Nayarit</h5>
+                        <p class="card-text">Empresa de uso de grúas.</p>
                     </div>
                 </div>
             </div>
@@ -245,23 +371,112 @@
 
         <div class="col-sm-3">
             <div class="card" data-toggle="modal" data-target="#noti1" style="width: 18rem;">
-                <img class="card-img-top" src="img/noti1.jpg" alt="Card image cap">
+                <img class="card-img-top rounded mx-auto d-block" id="noti1img" src="" alt="Card image cap">
                 <div class="card-body">
-                    <a class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</a>
+                    <a id="noti1Title" class="card-text"></a>
                 </div>
             </div>
+            <div class="card" data-toggle="modal" data-target="#noti2" style="width: 18rem;">
+                <img class="card-img-top rounded mx-auto d-block" id="noti2img" src="" alt="Card image cap">
+                <div class="card-body">
+                    <a id="noti2Title" class="card-text"></a>
+                </div>
+            </div>
+            <div class="card" data-toggle="modal" data-target="#noti3" style="width: 18rem;">
+                <img class="card-img-top rounded mx-auto d-block" id="noti3img" src="" alt="Card image cap">
+                <div class="card-body">
+                    <a id="noti3Title" class="card-text"></a>
+                </div>
+            </div>
+            <div class="card" data-toggle="modal" data-target="#noti4" style="width: 18rem;">
+                <img class="card-img-top rounded mx-auto d-block" id="noti4img" src="" alt="Card image cap">
+                <div class="card-body">
+                    <a id="noti4Title" class="card-text"></a>
+                </div>
+            </div><br>
+
+            <div class="btn-group btn-group-vertical btn-group-lg bg-primary" role="group" aria-labell="Nuestras redes sociales:">
+                <!--Facebook-->
+                <button type="button" class="btn btn-facebook"><i class="fab fa-facebook-f pr-1"></i></button>
+                <!--Twitter-->
+                <button type="button" class="btn btn-twitter"><i class="fab fa-twitter pr-1"></i></button>
+                <!--Google +-->
+                <button type="button" class="btn btn-google"><i class="fab fa-google-plus-g pr-1"></i></button>
+                <!--Linkedin-->
+                <button type="button" class="btn btn-linkedin"><i class="fab fa-linkedin-in pr-1"></i></button>
+                <!--Instagram-->
+                <button type="button" class="btn btn-instagram"><i class="fab fa-instagram pr-1"></i></button>
+            </div>
         </div>
-        <div class="modal fade" id="noti1" tabindex="-1" role="dialog" aria-labelledby="noti1Label" aria-hidden="true">
+        <div class="modal fade" id="noti1" tabindex="-1" role="dialog" aria-labelledby="cardNoti1img" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="noti1Label"><img class="modal-title " id src="img/noti1.jpg"></h5>
+                        <h5 class="modal-title" id="noti1Label"><img class="modal-title rounded mx-auto d-block" id="cardNoti1img" src="#noti1img"></h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
+                            <span aria-hidden="true">&times</span>
                         </button>
                     </div>
                     <div class="modal-body">
-                        ...
+                        <a id="cardNoti1Title">Titulo</a><hr>
+                        <a id="cardNoti1Body">Cuerpo</a>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="noti2" tabindex="-1" role="dialog" aria-labelledby="noti2Label" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="noti2Label"><img class="modal-title rounded mx-auto d-block" id="cardNoti2img" src="img/noti2.jpg"></h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <a id="cardNoti2Title">Titulo</a><hr>
+                        <a id="cardNoti2Body">Cuerpo</a>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="noti3" tabindex="-1" role="dialog" aria-labelledby="noti3Label" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="noti3Label"><img class="modal-title rounded mx-auto d-block" id="cardNoti3img" src="img/noti1.jpg"></h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <a id="cardNoti3Title">Titulo</a><hr>
+                        <a id="cardNoti3Body">Cuerpo</a>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="noti4" tabindex="-1" role="dialog" aria-labelledby="noti4Label" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="noti4Label"><img class="modal-title rounded mx-auto d-block" id="cardNoti4img" src="img/noti1.jpg"></h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <a id="cardNoti4Title">Titulo</a><hr>
+                        <a id="cardNoti4Body">Cuerpo</a>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -271,28 +486,5 @@
         </div>
     </div>
 </div>
-
-<script src="https://www.gstatic.com/firebasejs/5.9.3/firebase.js"></script>
-<script src="https://www.gstatic.com/firebasejs/5.8.4/firebase-auth.js"></script>
-<script>
-    // Initialize Firebase
-    var config = {
-        apiKey: "AIzaSyDOg6qmvkj-2cQJwiPZl-_iYIq6dSHrwV8",
-        authDomain: "hackatonnay.firebaseapp.com",
-        databaseURL: "https://hackatonnay.firebaseio.com",
-        projectId: "hackatonnay",
-        storageBucket: "hackatonnay.appspot.com",
-        messagingSenderId: "996222165208"
-    };
-    firebase.initializeApp(config);
-</script>
-<script type="text/javascript">
-    $(document).ready(function () {
-        $('#sidebarCollapse').on('click', function () {
-            $('#sidebar').toggleClass('active');
-            $(this).toggleClass('active');
-        });
-    });
-</script>
 </body>
 </html>
